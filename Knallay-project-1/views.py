@@ -15,7 +15,8 @@ def contract(request, contract_id):
         'allcontracts':models.Contract.objects.all(),
         'allcarriers': carriers,
         'allcustomers':customers,
-        'comments':contract.comments.all()        
+        'comments':contract.comments.all(),   
+        "user": logged_user(request)     
     }
     return render(request, 'contract.html',context)
 
@@ -102,4 +103,3 @@ def contract_comment(request, contract_id):
 
 
     return redirect('contract_detail',contract_id=contract_id)
-
