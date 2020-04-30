@@ -59,6 +59,13 @@ def edit_contract(request, contract_id):
     contract.route.end.street=request.POST['delivery_street_address']
     contract.route.end.city=request.POST['delivery_city']
     contract.route.end.state=request.POST['delivery_state']
+    contract.route.start.zip_code=request.POST['pickup_zip_code']
+    contract.route.end.zip_code=request.POST['delivery_zip_code']
+    models.Comment.objects.create(
+        content=request.POST['comments'],
+        user=logged_user(request), 
+        contract= Contract.objects.get(id=contract_id)
+    )
     print(contract.trip_number)
         
     contract.save()
